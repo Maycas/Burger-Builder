@@ -3,6 +3,7 @@ import React, { Component } from 'react'
 import axios from '../../axios-orders'
 
 import Aux from '../../hoc/Aux/Aux'
+import withErrorHandler from '../../hoc/withErrorHandler/withErrorHandler'
 
 import Burger from '../../components/Burger/Burger'
 import BuildControls from '../../components/Burger/BuildControls/BuildControls'
@@ -135,8 +136,10 @@ class BurgerBuilder extends Component {
 
     return (
       <Aux>
-        <Modal show={this.state.purchasing} modalClosed={this.purchaseCancelHandler}>
-          {orderSummary}
+        <Modal 
+          show={this.state.purchasing} 
+          modalClosed={this.purchaseCancelHandler}>
+            {orderSummary}
         </Modal>
         <Burger ingredients={this.state.ingredients} />
         <BuildControls 
@@ -152,4 +155,4 @@ class BurgerBuilder extends Component {
   }
 }
 
-export default BurgerBuilder
+export default withErrorHandler(BurgerBuilder, axios)
